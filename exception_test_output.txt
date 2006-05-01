@@ -1,0 +1,57 @@
+VC++ 6 no_var_no_ref
+{{{ 0:Overflow::Overflow(int)
+{{{ 1:Overflow::Overflow(const Overflow&)
+	1:Overflow::vf()
+}}} 1:Overflow::~Overflow()
+}}} 0:Overflow::~Overflow()
+
+VC++ 6 no_var_ref.txt
+{{{ 0:Overflow::Overflow(int)
+	0:Overflow::vf()
+}}} 0:Overflow::~Overflow()
+
+VC++ 6 var_no_ref.txt  
+{{{ 0:Overflow::Overflow(int)
+{{{ 1:Overflow::Overflow(const Overflow&)
+{{{ 2:Overflow::Overflow(const Overflow&)
+	2:Overflow::vf()
+}}} 2:Overflow::~Overflow()
+}}} 1:Overflow::~Overflow()
+
+VC++ 6 var_ref.txt  
+{{{ 0:Overflow::Overflow(int)
+{{{ 1:Overflow::Overflow(const Overflow&)
+	1:Overflow::vf()
+}}} 1:Overflow::~Overflow()
+
+GCC 2.9-cygwin no_var_no_ref.txt  
+{{{ 0:Overflow::Overflow(int)
+{{{ 1:Overflow::Overflow(const Overflow&)
+}}} 0:Overflow::~Overflow()
+{{{ 2:Overflow::Overflow(const Overflow&)
+	2:Overflow::vf()
+}}} 2:Overflow::~Overflow()
+}}} 1:Overflow::~Overflow()
+
+GCC 2.9-cygwin no_var_ref.txt  
+{{{ 0:Overflow::Overflow(int)
+{{{ 1:Overflow::Overflow(const Overflow&)
+}}} 0:Overflow::~Overflow()
+	1:Overflow::vf()
+}}} 1:Overflow::~Overflow()
+
+GCC 2.9-cygwin var_no_ref.txt  
+{{{ 0:Overflow::Overflow(int)
+{{{ 1:Overflow::Overflow(const Overflow&)
+}}} 0:Overflow::~Overflow()
+{{{ 2:Overflow::Overflow(const Overflow&)
+	2:Overflow::vf()
+}}} 2:Overflow::~Overflow()
+}}} 1:Overflow::~Overflow()
+
+GCC 2.9-cygwin var_ref.txt  
+{{{ 0:Overflow::Overflow(int)
+{{{ 1:Overflow::Overflow(const Overflow&)
+}}} 0:Overflow::~Overflow()
+	1:Overflow::vf()
+}}} 1:Overflow::~Overflow()
