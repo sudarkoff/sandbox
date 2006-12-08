@@ -1,4 +1,6 @@
 module MinCombination where
+import Data.List
+import Control.Monad
         
 -- http://en.wikipedia.org/wiki/Permutations_and_combinations
 combinations 0 _ = [[]]
@@ -16,4 +18,5 @@ monthsTakings =
       43, 54, -45, -12,-12,
       38, 25,   3,   7,  8]
 
-main = foldr (+) 1 monthsTakings
+main = 
+    combinations 9 monthsTakings
