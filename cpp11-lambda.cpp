@@ -1,11 +1,8 @@
-//Program to test the new C++11 lambda syntax
+// New C++11 lambda syntax
 #include <iostream>
-
-using namespace std;
 
 int main()
 {
-    cout << "Expecting 6" << endl;
-    cout << [](int m, int n) { return m + n;} (2,4) << endl;
+    std::cout << "5^2 = " << [](int a) { return a*a; }(5) << std::endl;
     return 0;
 }
