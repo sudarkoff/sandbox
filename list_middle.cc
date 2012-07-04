@@ -22,5 +22,5 @@ int main(int argc, char* argv[])
 
   list_type::iterator middle = list_middle(numbers);
   std::cout << *middle << std::endl;
-  remove_element(middle);
+  //remove_element(middle);
 }

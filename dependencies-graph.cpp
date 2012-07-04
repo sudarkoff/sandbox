@@ -65,7 +65,7 @@ public:
 			indices_type adjacent;
 			get_adjacent_nodes(start_node, adjacent);
 			for (auto node : adjacent) {
-				// ... Finish implementing toposort
+				// TODO: ... Finish implementing toposort
 				// 	see http://en.wikipedia.org/wiki/Topological_sorting for details
 			}
 		}

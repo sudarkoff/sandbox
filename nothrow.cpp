@@ -3,7 +3,7 @@
 void strcat(char* dst, char* src)
 {
 	dst += strlen(dst);
-	while(*dst++ = *src++);
+	while((*dst++ = *src++));
 }
 
 int main()

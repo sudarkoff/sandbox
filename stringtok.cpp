@@ -3,7 +3,7 @@
 #include <list>
 #include "stringtok.h"
 
-void main()
+int main(int argc, char* argv[])
 {
 	std::list<std::string>  ls;
 	stringtok (ls, "c:\\this\\is\\a\\path", "/\\");

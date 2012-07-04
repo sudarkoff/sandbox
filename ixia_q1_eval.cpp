@@ -22,16 +22,16 @@ int Eval(std::string expression)
     
     int sum = 0;
     for (size_t i = 0; i <= expression.length(); ++i) {
-    		std::string item = "";
-    		while ((i < expression.length()) && std::isdigit(expression[i])) {
-    			item += expression[i++];
-    		}
-    		if (((expression[i] == '+') && (i < expression.length() - 1)) || (i == expression.length())) {
-	    		sum += boost::lexical_cast<int>(item); // should not throw by way of constructing item
-    		}
-    		else {
-    			return -1;
-    		}
+		std::string item = "";
+		while ((i < expression.length()) && std::isdigit(expression[i])) {
+			item += expression[i++];
+		}
+		if (((expression[i] == '+') && (i < expression.length() - 1)) || (i == expression.length())) {
+    		sum += boost::lexical_cast<int>(item); // should not throw by way of constructing item
+		}
+		else {
+			return -1;
+		}
     }
     
     std::cerr << sum << std::endl;

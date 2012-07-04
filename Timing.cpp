@@ -3,13 +3,16 @@
 
 using namespace std;
 
-int cdecl main(void)
+int main(int argc, char* argv[])
 {
   clock_t start, finish;
 
   start = clock();
 
-  //...
+  for (int i = 0; i < 1000000; ++i) {
+	  int l = -i;
+	  l = l - i;
+  }
   
   finish = clock();
 

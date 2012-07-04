@@ -48,7 +48,7 @@ void configuration::convert<double> (const std::string &s, double &out)
 }
 
 template <>
-void configuration::convert<std::string> (const std::string &s, string &out)
+void configuration::convert<std::string> (const std::string &s, std::string &out)
 {
   out = s;
 }
@@ -69,7 +69,7 @@ int main()
 
   std::cout 
   	<< "http://www."
-  	<< config.get<string>("host","cia.com") << ":"
+  	<< config.get<std::string>("host","cia.com") << ":"
   	<< config.get<int>("port") << "/?check="
  	<< config.get<bool>("check", false) << std::endl;
 }

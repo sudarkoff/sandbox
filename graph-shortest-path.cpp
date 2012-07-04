@@ -9,6 +9,7 @@
 #include <fstream>
 #include <iterator>
 #include <vector>
+#include <map>
 #include <algorithm>
 
 static const int MAX_NODES=16;
@@ -51,15 +52,20 @@ public:
     void export_dot(char const* filename) const
     {
         std::ofstream ofs(filename);
-        ofs << "digraph FooBar {" << std::endl 
-            << "\tsize = \"8,8\";" << std::endl;
+        ofs << "digraph D {\n"
+			<< "\trankdir=LR\n"
+			<< "\tsize=\"4,3\"\n"
+			<< "\tratio=\"fill\"\n"
+			<< "\tedge[style=\"bold\"]\n"
+			<< "\tnode[shape=\"circle\"]\n"
+            << "\tsize = \"8,8\";\n";
         // output all edges
         for (size_t c = 0; c < nodes_.size(); ++c) {
             for (size_t r = 0; r < nodes_.size(); ++r) {
                 if (edges_[r][c] > 0) {
                     ofs << "\t" << nodes_[r] << " -> " << nodes_[c]
-						<< " [weight=" << edges_[r][c] << "]"
-						<< ";" << std::endl;
+						<< " [label=" << edges_[r][c]
+						<< ",color=" << ((r==c)?"red": "black") << "];\n";
                 }
             }
         }
@@ -72,9 +78,7 @@ public:
 
 	void shortest_path(value_type&& A, value_type&& B, nodes_type& path)
 	{
-		for (auto node: nodes_) {
-			
-		}
+		// TODO: Implement
 	}
 
 private:
@@ -126,10 +130,11 @@ private:
 int main(int argc, char* argv[])
 {
 	graph<char> cities;
+	// The following example should output: R E I W
 	cities.connect('R', 'E', 5);
 	cities.connect('E', 'I', 3);
-	cities.connect('E', 'N', 12);
-	cities.connect('E', 'W', 1);
+	cities.connect('E', 'N', 1);
+	cities.connect('E', 'W', 12);
 	cities.connect('I', 'W', 6);
 	cities.connect('N', 'I', 4);
 	cities.export_dot("graph.dot");
