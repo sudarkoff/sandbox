@@ -1,17 +1,3 @@
-/*******************************************************************************
-  Copyright (c) 2002, George Sudarkoff. All rights reserved.
-
-  $History: demangle.cpp $
- * 
- * *****************  Version 3  *****************
- * User: George       Date: 4/04/02    Time: 3:09p
- * Updated in $/SmallProjects
- * 
- * *****************  Version 2  *****************
- * User: George       Date: 4/04/02    Time: 3:08p
- * Updated in $/SmallProjects
-*******************************************************************************/
-
 #include <windows.h>
 #include <stdio.h>
 #include <imagehlp.h>
@@ -20,8 +6,7 @@ int main(int argc, char* argv[])
 {
    if (argc == 1)
       printf ("\nUndecorates Visual C++ mangled names. "
-              "\nUsage: demangle <decorated_name> [[<decorated_name>] ...] "
-              "\nAuthor: George_Sudarkov@amat.com\n\n");
+              "\nUsage: demangle <decorated_name> [[<decorated_name>] ...] \n\n");
 
    char *undecorated_name = new char[513];
    memset(undecorated_name, 0, 513);

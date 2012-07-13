@@ -1,10 +1,5 @@
 #!/usr/bin/env python
 # encoding: utf-8
-"""
-ispy.py
-
-Copyright (c) 2007 BitComber.com. All rights reserved.
-"""
 
 import objc, AppKit, Foundation
 import os, sys, time, datetime
@@ -89,7 +84,7 @@ class Controller(NSObject):
         # If we have images to compare and motion is detected
         if self.img_diff.images_valid() and self.img_diff.motion_detected():
             self.stamp += 1
-            im.transpose(1).save("/Users/george/Pictures/ispy/snapshot_%s.png" % self.stamp)
+            im.transpose(1).save("~/Pictures/ispy/snapshot_%s.png" % self.stamp)
             
         # Sleep for half a second, to reduce CPU utilization
         # (TODO: we should turn off the camera for this time)
