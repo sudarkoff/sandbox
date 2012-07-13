@@ -1,3 +1,3 @@
-# A variety of one to two-file examples, code snippets and experiments
+# Sandbox
 
-Some of it is useful (like a template for a command-line utility in Python, which includes parsing parameters, automatic command discovery, etc.), but most of it is just little examples and experiments.
+A variety of one to two-file examples, code snippets and experiments. Some of it is useful (like a template for a command-line utility in Python, which includes parsing parameters, automatic command discovery, etc.), but most of it is just little experiments.
