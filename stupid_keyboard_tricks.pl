@@ -26,7 +26,7 @@ $r = $r1 . $r2 . $r3;
 open(IN, '< /usr/share/dict/words') or die "no words found\n";
 
 #filter_for('Top Row',          sub { /^[$r1$l1]+$/io } );
-#filter_for('Middle Row',       sub { /^[$r2$l2]+$/io } );
+filter_for('Middle Row',       sub { /^[$r2$l2]+$/io } );
 #filter_for('Bottom Row',       sub { /^[$r3$l3]+$/io } );
 
 #filter_for('Top Row Left',     sub { /^[$l1]+$/io } );
@@ -37,7 +37,7 @@ open(IN, '< /usr/share/dict/words') or die "no words found\n";
 #filter_for('Bottom Row Right', sub { /^[$r3]+$/io } );
 
 #filter_for('Left Side',        sub { /^[$l]+$/io } );
-filter_for('Right Side',       sub { /^[$r]+$/io } );
+#filter_for('Right Side',       sub { /^[$r]+$/io } );
 
 #filter_for('Alternating Left-Right-Left',
 #           sub { /^([$r][$l])+[$r]?$/io || /^([$l][$r])+[$l]?$/io } );
