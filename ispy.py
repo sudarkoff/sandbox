@@ -7,7 +7,7 @@ import os, sys, time, datetime
 from PyObjCTools import AppHelper
 from PIL import Image, ImageDraw
 
-width, height = 320, 240
+width, height = 1280, 720
 size = (width, height)
 
 class ImageDiff(object):
@@ -84,7 +84,7 @@ class Controller(NSObject):
         # If we have images to compare and motion is detected
         if self.img_diff.images_valid() and self.img_diff.motion_detected():
             self.stamp += 1
-            im.transpose(1).save("~/Pictures/ispy/snapshot_%s.png" % self.stamp)
+            im.transpose(1).save("~/Dropbox/ispy/snapshot_%s.png" % self.stamp)
             
         # Sleep for half a second, to reduce CPU utilization
         # (TODO: we should turn off the camera for this time)
