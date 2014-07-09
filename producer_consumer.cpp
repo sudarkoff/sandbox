@@ -1,61 +1,80 @@
+/**
+ * C++11 implementation of the producer-consumer design pattern.
+ *
+ * To build and execute:
+ *   $ clang++ -std=c++11 -stdlib=libc++ producer_consumer.cpp -lc++ -lpthread && ./a.out
+ */
+
 #include <iostream>
 #include <queue>
 #include <thread>
 #include <mutex>
 #include <condition_variable>
 
-int MAX_SIZE = 5;
-std::queue<int> Q;
-std::condition_variable E, F;
-std::mutex M;
+const int ITEMS_TO_PRODUCE = 100000;
+const int QUEUE_CAPACITY = 10;
 
-int item = 0;
+struct Queue {
+  public:
+    Queue() : done(false) {}
 
-bool exit() { return (item > 81920); }
+  public:
+    std::queue<int> q;
+    std::condition_variable not_full, not_empty;
+    std::mutex m;
+    bool done;
+};
 
-void producer()
+void producer(Queue& Q)
 {
-    while (!exit()) {
-        std::unique_lock<std::mutex> lock(M);
-        E.wait(lock, []() { return Q.size() <= MAX_SIZE; });
+  static int item = 0;
 
-        std::cout << "PUSH item: " << ++item << std::endl;
-        Q.push(item);
+  while (!Q.done) {
+    std::unique_lock<std::mutex> lock(Q.m);
+    Q.not_full.wait(lock, [&Q]() { return Q.q.size() <= QUEUE_CAPACITY; });
 
-        F.notify_one();
+    if (item < ITEMS_TO_PRODUCE) {
+      std::cout << "<<< PUSH item: " << ++item << std::endl;
+      Q.q.push(item);
+
+      Q.not_empty.notify_one();
     }
+    else {
+      Q.done = true;
+    }
+  }
 }
 
-void consumer()
+void consumer(Queue& Q)
 {
-    while (!exit()) {
-        std::unique_lock<std::mutex> lock(M);
-        F.wait(lock, []() { return Q.size() > 0; });
+  int item = 0;
 
-        int item = Q.front(); Q.pop();
-        std::cout << "\t\tPOP item: " << item << ", Q.size: " << Q.size() << std::endl;
+  while (1) {
+    std::unique_lock<std::mutex> lock(Q.m);
 
-        E.notify_one();
-    }
+    Q.not_empty.wait(lock, [&Q]() { return (!Q.q.empty() || Q.done); });
+    if (Q.done && Q.q.empty()) { Q.not_empty.notify_all(); break; }
+
+    item = Q.q.front(); Q.q.pop();
+    std::cout << "\t\t>>> POP item: " << item << ", queue size: " << Q.q.size() << std::endl;
+
+    Q.not_full.notify_one();
+  }
 }
 
 int main(int argc, char* argv[])
 {
-    std::thread p1(producer);
-    std::thread p2(producer);
-    std::thread p3(producer);
+  Queue Q;
 
-    std::thread c1(consumer);
-    std::thread c2(consumer);
-    std::thread c3(consumer);
+  std::vector<std::thread> P(8);
+  std::vector<std::thread> C(4);
 
-    p1.join();
-    p2.join();
-    p3.join();
+  for (auto &p : P) { p = std::thread(producer, std::ref(Q)); }
+  for (auto &c : C) { c = std::thread(consumer, std::ref(Q)); }
 
-    c1.join();
-    c2.join();
-    c3.join();
+  for (auto &c : C) { c.join(); }
+  for (auto &p : P) { p.join(); }
 
-    return 0;
+  return 0;
 }
+
